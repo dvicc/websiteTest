@@ -14,13 +14,11 @@
 
     <header>
         <div class="logo">FUTURE.</div>
-        
         <div class="hamburger-menu">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
-
         <nav class="nav-menu">
             <ul>
                 <li><a href="#chi-siamo" class="nav-link">Chi Siamo</a></li>
@@ -35,7 +33,6 @@
         <div class="hero-content">
             <h1>Costruiamo il <br><span class="highlight">Domani</span></h1>
             <p>Una piattaforma per il cambiamento reale. Pragmatismo, competenza e passione al servizio della comunità.</p>
-            
             <div class="btn-group">
                 <a href="#unisciti" class="btn-main">Partecipa ora</a>
                 <a href="#chi-siamo" class="btn-outline">Scopri di più</a>
@@ -59,30 +56,21 @@
             <h2>I Nostri Valori</h2>
             <p>Le basi solide su cui fondiamo ogni nostra proposta.</p>
         </div>
-        
         <div class="grid-container">
             <div class="card hidden">
-                <div class="icon-box">
-                    <i class="fas fa-globe-europe"></i>
-                </div>
+                <div class="icon-box"><i class="fas fa-globe-europe"></i></div>
                 <h3>Europa Unita</h3>
                 <p>Più integrazione per affrontare le sfide globali che nessun paese può risolvere da solo.</p>
             </div>
-            
             <div class="card hidden">
-                <div class="icon-box">
-                    <i class="fas fa-leaf"></i>
-                </div>
+                <div class="icon-box"><i class="fas fa-leaf"></i></div>
                 <h3>Sostenibilità</h3>
-                <p>Economia circolare e protezione dell'ambiente come motore di sviluppo, non come ostacolo.</p>
+                <p>Economia circolare e protezione dell'ambiente come motore di sviluppo.</p>
             </div>
-            
             <div class="card hidden">
-                <div class="icon-box">
-                    <i class="fas fa-balance-scale"></i>
-                </div>
+                <div class="icon-box"><i class="fas fa-balance-scale"></i></div>
                 <h3>Giustizia Sociale</h3>
-                <p>Pari opportunità di partenza per tutti, indipendentemente dal ceto sociale o dalla provenienza.</p>
+                <p>Pari opportunità di partenza per tutti, indipendentemente dal ceto sociale.</p>
             </div>
         </div>
     </section>
@@ -97,30 +85,13 @@
             <div class="card hidden forum-card">
                 
                 <div id="message-board" class="message-board">
-                    <div class="message-item">
-                        <div class="msg-header">
-                            <div class="avatar avatar-blue">M</div>
-                            <strong>Marco Rossi</strong>
-                            <span>2 ore fa</span>
-                        </div>
-                        <p>Grande iniziativa! Spero che si parli presto anche di energia nucleare pulita.</p>
                     </div>
-
-                    <div class="message-item">
-                        <div class="msg-header">
-                            <div class="avatar avatar-red">G</div>
-                            <strong>Giulia Bianchi</strong>
-                            <span>Appena iscritta</span>
-                        </div>
-                        <p>Sono d'accordo con la visione europea. Dobbiamo essere più uniti.</p>
-                    </div>
-                </div>
 
                 <div class="write-message">
                     <h4>Lascia un commento</h4>
                     <input type="text" id="username-input" placeholder="Il tuo nome">
                     <textarea id="message-input" rows="3" placeholder="Scrivi qui il tuo pensiero..."></textarea>
-                    <button onclick="postMessage()" class="btn-nav btn-post">Pubblica</button>
+                    <button id="send-btn" class="btn-nav btn-post">Pubblica</button>
                 </div>
 
             </div>
@@ -130,9 +101,8 @@
     <section id="unisciti" class="cta-section">
         <div class="cta-content card hidden">
             <h2>Resta informato</h2>
-            <p>Il cambiamento inizia con l'informazione. Iscriviti per ricevere aggiornamenti.</p>
-            
-            <form class="newsletter-box" action="#" onsubmit="alert('Grazie per esserti iscritto!'); return false;">
+            <p>Iscriviti per ricevere aggiornamenti.</p>
+            <form class="newsletter-box" action="#" onsubmit="alert('Grazie!'); return false;">
                 <input type="email" placeholder="Inserisci la tua email..." required>
                 <button type="submit" class="btn-main">Iscriviti</button>
             </form>
@@ -143,7 +113,7 @@
         <p>&copy; 2025 Movimento Futuro - Privacy Policy | Contatti</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
 </body>
 </html>
