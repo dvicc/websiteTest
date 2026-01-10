@@ -92,17 +92,15 @@ header {
 
 /* --- HERO SECTION --- */
 .hero {
-    height: 120vh;
+    height: 100vh; /* Altezza schermo intero per PC */
     background: linear-gradient(rgba(15, 52, 96, 0.75), rgba(15, 52, 96, 0.6)),
                 url('sfondo.jpg'); 
     
-    /* Gestione Sfondo */
-    background-position: 65% center; /* Spostato leggermente a destra */
+    background-position: 65% center;
     background-size: cover;            
     background-repeat: no-repeat;      
     background-attachment: fixed;      
     
-    /* Layout Flex per centrare tutto il blocco */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,21 +109,20 @@ header {
     padding: 0 20px;
 }
 
-/* Nuovo layout orizzontale per Loghi + Testo */
 .hero-layout {
     display: flex;
-    align-items: center; /* Centra verticalmente */
-    justify-content: space-between; /* Spinge i loghi ai lati */
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: 1400px; /* Larghezza massima aumentata per dare respiro */
+    max-width: 1400px;
     margin: 0 auto; 
 }
 
 .hero-logo-side {
-    width: 180px; /* Dimensione loghi PC */
+    width: 180px;
     height: auto; 
     flex-shrink: 0; 
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); /* Ombra per farli risaltare sullo sfondo */
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); 
 }
 
 .hero-logo-left { margin-right: 40px; }
@@ -159,7 +156,7 @@ header {
     margin-bottom: 1.5rem;
     color: #e0e0e0;
     animation: fadeInUp 1s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    opacity: 0; /* Parte invisibile per l'animazione */
+    opacity: 0;
 }
 
 .highlight { color: #4cc9f0; }
@@ -250,7 +247,6 @@ section { padding: 6rem 10%; }
 .write-message input:focus, .write-message textarea:focus { outline: none; border-color: var(--primary); }
 .btn-post { width: auto; display: inline-block; margin-top: 5px; }
 
-/* Scrollbar personalizzata */
 .message-board::-webkit-scrollbar { width: 6px; }
 .message-board::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
 
@@ -321,7 +317,6 @@ footer {
 .footer-bottom a { color: #888; transition: 0.3s; }
 .footer-bottom a:hover { color: var(--accent); text-decoration: underline; }
 
-/* --- ANIMAZIONI SCROLL --- */
 .hidden { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .show { opacity: 1; transform: translateY(0); }
 .grid-container .card:nth-child(2) { transition-delay: 200ms; }
@@ -335,14 +330,24 @@ footer {
 /* Tablet e Mobile (< 992px) */
 @media (max-width: 992px) {
     
-    /* Gestione Layout Hero (Loghi sopra e sotto) */
+    /* MODIFICA FONDAMENTALE PER MOBILE: 
+       Sblocca l'altezza fissa e aggiungi padding sopra 
+       per evitare che il testo finisca sotto il menu */
+    .hero {
+        height: auto; /* L'altezza si adatta al testo */
+        min-height: 100vh; /* Ma è almeno alta quanto lo schermo */
+        padding-top: 120px; /* Spazio per il menu fisso + extra */
+        padding-bottom: 60px; /* Spazio in fondo */
+        align-items: flex-start; /* Allinea il contenuto in alto (dopo il padding) */
+    }
+
     .hero-layout {
-        flex-direction: column; /* Impila verticalmente */
+        flex-direction: column; /* Impila verticalmente: Logo -> Testo -> Logo */
     }
 
     .hero-logo-side {
-        width: 120px; /* Loghi più piccoli */
-        margin: 0; /* Rimuove margini laterali */
+        width: 100px; /* Loghi più piccoli */
+        margin: 0 auto; /* Centrati */
     }
 
     .hero-logo-left {
@@ -352,15 +357,18 @@ footer {
 
     .hero-text-content {
         order: 2; /* Testo al centro */
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        width: 100%; /* Occupa tutta la larghezza */
     }
 
     .hero-logo-right {
         order: 3; /* Terzo elemento in basso */
     }
 
-    .hero-content h1 { font-size: 2.5rem; }
-    .hero-text-content h2 { font-size: 1.5rem; }
+    /* Riduciamo un po' il font su mobile per farlo entrare meglio */
+    .hero-content h1 { font-size: 2.2rem; }
+    .hero-text-content h2 { font-size: 1.3rem; }
+    .hero-content p { font-size: 0.95rem; text-align: justify; } /* Testo giustificato per ordine */
 }
 
 /* Mobile Piccolo (< 768px) */
