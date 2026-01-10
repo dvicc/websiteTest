@@ -53,8 +53,6 @@ header {
     letter-spacing: -1px;
 }
 
-/* Rimosso stile specifico per .logo img, ora gestito in linea nell'HTML */
-
 .nav-menu ul { display: flex; gap: 2rem; align-items: center; }
 
 .nav-link {
@@ -94,20 +92,17 @@ header {
 
 /* --- HERO SECTION --- */
 .hero {
-    
-    height: 100vh;
-    
-    
+    height: 120vh;
     background: linear-gradient(rgba(15, 52, 96, 0.75), rgba(15, 52, 96, 0.6)),
                 url('sfondo.jpg'); 
     
-    
-    background-position: center center; 
+    /* Gestione Sfondo */
+    background-position: 65% center; /* Spostato leggermente a destra */
     background-size: cover;            
     background-repeat: no-repeat;      
     background-attachment: fixed;      
     
-    
+    /* Layout Flex per centrare tutto il blocco */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,6 +111,33 @@ header {
     padding: 0 20px;
 }
 
+/* Nuovo layout orizzontale per Loghi + Testo */
+.hero-layout {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: space-between; /* Spinge i loghi ai lati */
+    width: 100%;
+    max-width: 1400px; /* Larghezza massima aumentata per dare respiro */
+    margin: 0 auto; 
+}
+
+.hero-logo-side {
+    width: 180px; /* Dimensione loghi PC */
+    height: auto; 
+    flex-shrink: 0; 
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); /* Ombra per farli risaltare sullo sfondo */
+}
+
+.hero-logo-left { margin-right: 40px; }
+.hero-logo-right { margin-left: 40px; }
+
+.hero-text-content {
+    flex-grow: 1; 
+    text-align: center; 
+    max-width: 900px; 
+}
+
+/* Animazioni e Tipografia Hero */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
@@ -126,24 +148,34 @@ header {
     font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hero-text-content h2 {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    animation: fadeInUp 1s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0; /* Parte invisibile per l'animazione */
 }
 
 .highlight { color: #4cc9f0; }
 
 .hero-content p {
-    font-size: 1.2rem;
-    max-width: 700px;
+    font-size: 1.1rem;
+    line-height: 1.6;
     margin: 0 auto 2.5rem auto;
     opacity: 0;
-    animation: fadeInUp 1s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: fadeInUp 1s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .btn-group {
     display: flex; gap: 1rem; justify-content: center;
     opacity: 0;
-    animation: fadeInUp 1s 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: fadeInUp 1s 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .btn-main, .btn-outline {
@@ -218,7 +250,7 @@ section { padding: 6rem 10%; }
 .write-message input:focus, .write-message textarea:focus { outline: none; border-color: var(--primary); }
 .btn-post { width: auto; display: inline-block; margin-top: 5px; }
 
-/* Scrollbar personalizzata per il forum */
+/* Scrollbar personalizzata */
 .message-board::-webkit-scrollbar { width: 6px; }
 .message-board::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
 
@@ -270,7 +302,6 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Hover effects: si colorano del colore del brand */
 .social-link:hover {
     transform: translateY(-5px) scale(1.1);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -296,10 +327,47 @@ footer {
 .grid-container .card:nth-child(2) { transition-delay: 200ms; }
 .grid-container .card:nth-child(3) { transition-delay: 400ms; }
 
-/* --- MOBILE --- */
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE MOBILE)
+========================================= */
+
+/* Tablet e Mobile (< 992px) */
+@media (max-width: 992px) {
+    
+    /* Gestione Layout Hero (Loghi sopra e sotto) */
+    .hero-layout {
+        flex-direction: column; /* Impila verticalmente */
+    }
+
+    .hero-logo-side {
+        width: 120px; /* Loghi più piccoli */
+        margin: 0; /* Rimuove margini laterali */
+    }
+
+    .hero-logo-left {
+        order: 1; /* Primo elemento in alto */
+        margin-bottom: 20px;
+    }
+
+    .hero-text-content {
+        order: 2; /* Testo al centro */
+        margin-bottom: 20px;
+    }
+
+    .hero-logo-right {
+        order: 3; /* Terzo elemento in basso */
+    }
+
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-text-content h2 { font-size: 1.5rem; }
+}
+
+/* Mobile Piccolo (< 768px) */
 @media (max-width: 768px) {
     .hamburger-menu { display: block; }
-    .hero-content h1 { font-size: 2.5rem; }
+
+    /* Menu a tendina laterale */
     .nav-menu {
         position: fixed; left: -100%; top: 0; width: 85%; height: 100vh;
         background: white; box-shadow: 10px 0 20px rgba(0,0,0,0.1);
