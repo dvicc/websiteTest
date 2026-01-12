@@ -1,8 +1,84 @@
-/* --- 1. IMPORTA FIREBASE (Versione Web) --- */
+/* ==========================================================================
+   1. GESTIONE NOTIZIE (MODIFICA QUI PER AGGIUNGERE NUOVI ARTICOLI)
+   ========================================================================== */
+
+const elencoNotizie = [
+    {
+        titolo: "Prima Notizia",
+        data: "12 Gennaio 2026",
+        categoria: "Ambiente",
+        // L'anteprima è quella che si vede in Home Page
+        anteprima: "Prima notizia, continua dopo..",
+        // Il testo completo si vede solo nella pagina notizie (puoi usare tag HTML come <br>)
+        testoCompleto: "Prima notizia"
+    },
+    {
+        titolo: "Seconda Notizia",
+        data: "11 Gennaio 2026",
+        categoria: "Politica",
+        // L'anteprima è quella che si vede in Home Page
+        anteprima: "Seconda notizia, continua dopo..",
+        // Il testo completo si vede solo nella pagina notizie (puoi usare tag HTML come <br>)
+        testoCompleto: "Seconda notizia"
+    }
+];
+
+/* --- LOGICA AUTOMATICA NOTIZIE (NON TOCCARE) --- */
+
+// Funzione: Carica l'ultima notizia in Home Page
+function caricaAnteprimaHome() {
+    const container = document.getElementById("home-news-preview");
+    if (!container) return; // Se non siamo in Home, esce
+
+    const ultimaNews = elencoNotizie[0]; // Prende la prima della lista
+
+    container.innerHTML = `
+        <div class="preview-header">
+            <span class="pulse-dot"></span>
+            <span class="preview-label">ULTIM'ORA</span>
+        </div>
+        <h3>${ultimaNews.titolo}</h3>
+        <span class="preview-date"><i class="far fa-clock"></i> ${ultimaNews.data}</span>
+        <p>${ultimaNews.anteprima}</p>
+        <a href="notizie.html" class="btn-read-more">Leggi tutto <i class="fas fa-arrow-right"></i></a>
+    `;
+}
+
+// Funzione: Carica tutte le notizie nella pagina News
+function caricaListaNotizie() {
+    const container = document.getElementById("lista-news-completa");
+    if (!container) return; // Se non siamo nella pagina News, esce
+
+    container.innerHTML = ""; // Pulisce
+
+    elencoNotizie.forEach(news => {
+        const scheda = document.createElement("div");
+        scheda.className = "card news-card-full";
+        scheda.innerHTML = `
+            <div class="news-header">
+                <span class="news-date">${news.data}</span>
+                <span class="news-tag">${news.categoria}</span>
+            </div>
+            <h3>${news.titolo}</h3>
+            <p>${news.testoCompleto}</p>
+        `;
+        container.appendChild(scheda);
+    });
+}
+
+// Avvia le funzioni notizie quando la pagina è pronta
+document.addEventListener("DOMContentLoaded", () => {
+    caricaAnteprimaHome();
+    caricaListaNotizie();
+});
+
+
+/* ==========================================================================
+   2. CONFIGURAZIONE FIREBASE E CHAT (NON TOCCARE)
+   ========================================================================== */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* --- 2. LA TUA CONFIGURAZIONE (I tuoi dati reali) --- */
 const firebaseConfig = {
   apiKey: "AIzaSyB0CYOq216AqY1utez4YIvpKGMCKJkFV30",
   authDomain: "sito-test-dd57e.firebaseapp.com",
@@ -13,11 +89,10 @@ const firebaseConfig = {
   measurementId: "G-3NNS2JR5LZ"
 };
 
-// Inizializza l'App e il Database
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* --- 3. GESTIONE MENU MOBILE E SCROLL (Codice Grafico) --- */
+/* --- MENU MOBILE E SCROLL --- */
 const hamburger = document.querySelector(".hamburger-menu");
 const navMenu = document.querySelector(".nav-menu");
 
@@ -33,7 +108,6 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     navMenu.classList.remove("active");
 }));
 
-// Animazione Scroll
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add('show');
@@ -41,14 +115,13 @@ const observer = new IntersectionObserver((entries) => {
 });
 document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
 
-
-/* --- 4. LOGICA CHAT REALE (Database) --- */
-
-// Funzione INVIO MESSAGGIO
+/* --- LOGICA CHAT --- */
 async function sendMessage() {
     const nameInput = document.getElementById("username-input");
     const msgInput = document.getElementById("message-input");
     const btn = document.getElementById("send-btn");
+
+    if(!nameInput || !msgInput) return; // Evita errori se siamo nella pagina notizie
 
     const name = nameInput.value.trim();
     const text = msgInput.value.trim();
@@ -58,62 +131,48 @@ async function sendMessage() {
         return;
     }
 
-    // Effetto caricamento sul bottone
     btn.textContent = "Invio...";
     btn.disabled = true;
 
     try {
-        // Salva su Firestore nella collezione "messaggi"
         await addDoc(collection(db, "messaggi"), {
             nome: name,
             testo: text,
-            data: Date.now() // Serve per ordinarli cronologicamente
+            data: Date.now()
         });
-
-        // Pulisce solo il campo messaggio (lascia il nome)
         msgInput.value = "";
-        
     } catch (e) {
         console.error("Errore invio: ", e);
-        alert("Errore nell'invio del messaggio. Controlla la Console.");
+        alert("Errore nell'invio.");
     }
-
-    // Ripristina il bottone
     btn.textContent = "Pubblica";
     btn.disabled = false;
 }
 
-// Collega il bottone alla funzione
 const sendBtn = document.getElementById("send-btn");
 if(sendBtn) {
     sendBtn.addEventListener("click", sendMessage);
 }
 
-// Funzione RICEZIONE MESSAGGI (Tempo Reale)
-// Ordina per data (dal più vecchio al più nuovo) e prende gli ultimi 50
-const q = query(collection(db, "messaggi"), orderBy("data", "asc"), limit(50));
-
-onSnapshot(q, (snapshot) => {
-    const board = document.getElementById("message-board");
-    if(!board) return;
-
-    // Pulisce la lavagna prima di ridisegnare
-    board.innerHTML = ""; 
-
-    snapshot.forEach((doc) => {
-        const msg = doc.data();
-        renderMessage(msg.nome, msg.testo);
+// Ascolta i messaggi solo se esiste la chat nella pagina
+const board = document.getElementById("message-board");
+if(board) {
+    const q = query(collection(db, "messaggi"), orderBy("data", "asc"), limit(50));
+    onSnapshot(q, (snapshot) => {
+        board.innerHTML = ""; 
+        snapshot.forEach((doc) => {
+            const msg = doc.data();
+            renderMessage(msg.nome, msg.testo);
+        });
+        board.scrollTop = board.scrollHeight;
     });
+}
 
-    // Scrolla in basso automaticamente
-    board.scrollTop = board.scrollHeight;
-});
-
-// Funzione che crea l'HTML del messaggio
 function renderMessage(name, text) {
     const board = document.getElementById("message-board");
+    if(!board) return;
+    
     const firstLetter = name.charAt(0).toUpperCase();
-
     const div = document.createElement("div");
     div.classList.add("message-item");
     div.innerHTML = `

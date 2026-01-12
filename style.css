@@ -92,7 +92,7 @@ header {
 
 /* --- HERO SECTION --- */
 .hero {
-    height: 100vh; /* Altezza schermo intero per PC */
+    height: 100vh;
     background: linear-gradient(rgba(15, 52, 96, 0.75), rgba(15, 52, 96, 0.6)),
                 url('sfondo.jpg'); 
     
@@ -134,12 +134,12 @@ header {
     max-width: 900px; 
 }
 
-/* Animazioni e Tipografia Hero */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* TITOLO PRINCIPALE */
 .hero-content h1 {
     font-family: var(--font-head);
     font-size: 3.5rem;
@@ -149,12 +149,14 @@ header {
     animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
+/* SOTTOTITOLO (MODIFICATO: Bianco e Grande come H1) */
 .hero-text-content h2 {
     font-family: var(--font-head);
-    font-size: 2rem;
+    font-size: 3.5rem; /* Stessa dimensione dell'H1 */
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #e0e0e0;
+    margin-bottom: 1rem;
+    color: #ffffff; /* Bianco Puro */
+    line-height: 1.2;
     animation: fadeInUp 1s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     opacity: 0;
 }
@@ -227,7 +229,69 @@ section { padding: 6rem 10%; }
 
 .about-container { max-width: 800px; margin: 0 auto; text-align: center; }
 
-/* --- FORUM STYLES --- */
+/* --- CARD NEWS ANTEPRIMA (HOME) --- */
+.news-preview-card {
+    background: #ffffff;
+    border-left: 5px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    position: relative;
+}
+
+.preview-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+
+.preview-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.pulse-dot {
+    width: 10px; height: 10px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 rgba(233, 69, 96, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(233, 69, 96, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+}
+
+.news-preview-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; line-height: 1.3; }
+.preview-date { font-size: 0.85rem; color: #888; margin-bottom: 1rem; display: block; }
+
+.btn-read-more {
+    margin-top: auto;
+    display: inline-block;
+    font-weight: 700;
+    color: var(--primary);
+    transition: 0.3s;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    width: fit-content;
+    padding-top: 1rem;
+}
+
+.btn-read-more:hover { color: var(--accent); border-bottom-color: var(--accent); transform: translateX(5px); }
+
+/* --- STILI NOTIZIE COMPLETA --- */
+.news-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+.news-card-full { text-align: left; border-left: 5px solid var(--accent); transition: transform 0.3s ease; }
+.news-card-full:hover { transform: translateX(5px); }
+.news-header { display: flex; gap: 15px; align-items: center; margin-bottom: 10px; }
+.news-date { font-weight: 700; color: var(--primary); font-size: 0.9rem; }
+.news-tag { background-color: #eee; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; color: #666; text-transform: uppercase; font-weight: bold; }
+.news-card-full h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark); }
+
+/* --- FORUM --- */
 .forum-card { text-align: left; padding: 2rem; }
 .message-board { max-height: 400px; overflow-y: auto; margin-bottom: 2rem; padding-right: 10px; }
 .message-item { margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; animation: fadeInUp 0.5s ease; }
@@ -240,150 +304,78 @@ section { padding: 6rem 10%; }
 
 .write-message { background: #f8f9fa; padding: 1.5rem; border-radius: 8px; }
 .write-message h4 { margin-bottom: 1rem; color: var(--primary); }
-.write-message input, .write-message textarea {
-    width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd;
-    border-radius: 4px; font-family: inherit;
-}
+.write-message input, .write-message textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
 .write-message input:focus, .write-message textarea:focus { outline: none; border-color: var(--primary); }
 .btn-post { width: auto; display: inline-block; margin-top: 5px; }
-
 .message-board::-webkit-scrollbar { width: 6px; }
 .message-board::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
 
-/* --- CTA E NEWSLETTER --- */
+/* --- CTA E FOOTER --- */
 .cta-section { padding-top: 0; }
 .cta-content { background-color: var(--primary); color: white; text-align: center; }
 .cta-content h2, .cta-content p { color: white; }
 .newsletter-box { margin-top: 2rem; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .newsletter-box input { padding: 1rem; width: 300px; border-radius: 6px; border: none; outline: none; }
 
-/* --- FOOTER & SOCIAL STYLES --- */
-footer {
-    background-color: #1a1a2e; 
-    color: #ffffff;
-    text-align: center;
-    padding: 3rem 1rem;
-    border-top: 5px solid var(--accent); 
-}
-
-.social-container h3 {
-    margin-bottom: 1.5rem;
-    font-family: var(--font-head);
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #a0a0a0;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.social-link {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.social-link:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
+footer { background-color: #1a1a2e; color: #ffffff; text-align: center; padding: 3rem 1rem; border-top: 5px solid var(--accent); }
+.social-container h3 { margin-bottom: 1.5rem; font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; color: #a0a0a0; }
+.social-icons { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.social-link { width: 50px; height: 50px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.1); }
+.social-link:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .social-link.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); border-color: transparent; }
 .social-link.facebook:hover { background-color: #1877F2; border-color: #1877F2; }
 .social-link.tiktok:hover { background-color: #000000; border-color: #ffffff; }
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1.5rem;
-    font-size: 0.85rem;
-    color: #888;
-}
-
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem; font-size: 0.85rem; color: #888; }
 .footer-bottom a { color: #888; transition: 0.3s; }
 .footer-bottom a:hover { color: var(--accent); text-decoration: underline; }
-
 .hidden { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 .show { opacity: 1; transform: translateY(0); }
 .grid-container .card:nth-child(2) { transition-delay: 200ms; }
 .grid-container .card:nth-child(3) { transition-delay: 400ms; }
 
-
 /* =========================================
    MEDIA QUERIES (RESPONSIVE MOBILE)
 ========================================= */
 
-/* Tablet e Mobile (< 992px) */
+/* Tablet (< 992px) */
 @media (max-width: 992px) {
+    .hero { height: auto; min-height: 100vh; padding-top: 120px; padding-bottom: 60px; align-items: flex-start; }
+    .hero-layout { flex-direction: column; }
+    .hero-logo-side { width: 100px; margin: 0 auto; }
+    .hero-logo-left { order: 1; margin-bottom: 20px; }
+    .hero-text-content { order: 2; margin-bottom: 30px; width: 100%; }
+    .hero-logo-right { order: 3; }
     
-    /* MODIFICA FONDAMENTALE PER MOBILE: 
-       Sblocca l'altezza fissa e aggiungi padding sopra 
-       per evitare che il testo finisca sotto il menu */
-    .hero {
-        height: auto; /* L'altezza si adatta al testo */
-        min-height: 100vh; /* Ma è almeno alta quanto lo schermo */
-        padding-top: 120px; /* Spazio per il menu fisso + extra */
-        padding-bottom: 60px; /* Spazio in fondo */
-        align-items: flex-start; /* Allinea il contenuto in alto (dopo il padding) */
-    }
-
-    .hero-layout {
-        flex-direction: column; /* Impila verticalmente: Logo -> Testo -> Logo */
-    }
-
-    .hero-logo-side {
-        width: 100px; /* Loghi più piccoli */
-        margin: 0 auto; /* Centrati */
-    }
-
-    .hero-logo-left {
-        order: 1; /* Primo elemento in alto */
-        margin-bottom: 20px;
-    }
-
-    .hero-text-content {
-        order: 2; /* Testo al centro */
-        margin-bottom: 30px;
-        width: 100%; /* Occupa tutta la larghezza */
-    }
-
-    .hero-logo-right {
-        order: 3; /* Terzo elemento in basso */
-    }
-
-    /* Riduciamo un po' il font su mobile per farlo entrare meglio */
-    .hero-content h1 { font-size: 2.2rem; }
-    .hero-text-content h2 { font-size: 1.3rem; }
-    .hero-content p { font-size: 0.95rem; text-align: justify; } /* Testo giustificato per ordine */
+    /* Ridimensionamento font Hero su tablet */
+    .hero-content h1 { font-size: 2.8rem; }
+    .hero-text-content h2 { font-size: 2.8rem; } /* Anche qui devono essere uguali */
+    
+    .news-preview-card { margin-top: 0; }
 }
 
-/* Mobile Piccolo (< 768px) */
+/* Mobile (< 768px) */
 @media (max-width: 768px) {
     .hamburger-menu { display: block; }
 
-    /* Menu a tendina laterale */
-    .nav-menu {
-        position: fixed; left: -100%; top: 0; width: 85%; height: 100vh;
-        background: white; box-shadow: 10px 0 20px rgba(0,0,0,0.1);
-        flex-direction: column; justify-content: flex-start; padding-top: 6rem;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    /* Menu laterale scorrevole */
+    .nav-menu { position: fixed; left: -100%; top: 0; width: 85%; height: 100vh; background: white; box-shadow: 10px 0 20px rgba(0,0,0,0.1); flex-direction: column; justify-content: flex-start; padding-top: 6rem; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .nav-menu.active { left: 0; }
     .nav-menu ul { flex-direction: column; gap: 2rem; width: 100%; }
     .btn-group { flex-direction: column; }
     .nav-link::after { display: none; }
+    
+    /* Ridimensionamento font Hero su MOBILE (Cellulari) */
+    /* Li metto entrambi a 2.2rem così sono grandi ma non spaccano lo schermo, e soprattutto sono UGUALI */
+    .hero-content h1 { font-size: 2.2rem; }
+    .hero-text-content h2 { font-size: 2.2rem; }
+
+    /* FIX PADDING CARD: Riduce i bordi interni per dare spazio al testo */
+    .card {
+        padding: 1.5rem !important; 
+    }
+
+    /* Aggiustamenti font news */
+    .news-card-full h3 { font-size: 1.3rem; }
+    .news-preview-card h3 { font-size: 1.3rem; }
+    .hero-content p { font-size: 0.95rem; text-align: justify; }
 }

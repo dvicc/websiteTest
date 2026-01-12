@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News | I Tafani</title>
+    
+    <link rel="icon" type="image/png" href="tafani.png">
+    <link rel="apple-touch-icon" href="tafani.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="tafani.png" alt="Logo I Tafani" style="height: 60px; vertical-align: middle;">
+            </a>
+        </div>
+
+        <div class="hamburger-menu">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#chi-siamo" class="nav-link">Chi Siamo</a></li>
+                <li><a href="notizie.html" class="nav-link" style="color: var(--accent);">News</a></li>
+                <li><a href="index.html#forum" class="nav-link">Chat</a></li>
+                <li><a href="index.html#unisciti" class="btn-nav">Unisciti</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" style="height: 40vh; min-height: 300px; padding-top: 100px;">
+        <div class="hero-content">
+            <h1>Ultime <span class="highlight">Notizie</span></h1>
+            <p>Resta aggiornato su tutto quello che succede a San Nicandro.</p>
+        </div>
+    </section>
+
+    <section id="news-list" style="padding-top: 3rem;">
+        <div class="news-container" id="lista-news-completa">
+            </div>
+    </section>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2025 I Tafani - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
